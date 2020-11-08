@@ -1,9 +1,15 @@
 const express = require('express')
 const Sequelize = require('sequelize')
+const jwt = require("jsonwebtoken");
+
+
+
 const app = express()
 const port = 3000
 app.use(express.json());
 const sequelize = new Sequelize('postgres://localhost:5432/mydatabasename')
+
+//db connection
 sequelize
 .authenticate()
 .then(() => {
@@ -12,31 +18,12 @@ console.log('Connection has been established successfully.');
 .catch(err => {
 console.error('Unable to connect to the database:', err);
 });
-const User = sequelize.define('user', {
-// attributes
-firstName: {
-type: Sequelize.STRING,
-allowNull: false
-},
-lastName: {
-type: Sequelize.STRING
-// allowNull defaults to true
-}
-}, {
-// options
-});
-// Note: using `force: true` will drop the table if it already exists
-User.sync({ force: true }) // Now the `users` table in the database corresponds to the model definition
 app.get('/', (req, res) => res.json({ message: 'Hello World' }))
-app.post('/user', async (req, res) => {
-try {
-const newUser = new User(req.body)
-await newUser.save()
-res.json({ user: newUser }) // Returns the new user that is created in the database
-} catch(error) {
-console.error(error)
-}
-})
+
+
+
+
+// get user
 app.get('/user/:userId', async (req, res) => {
 const userId = req.params.userId
 try {
@@ -52,34 +39,7 @@ console.error(error)
 }
 })
 
-const UserInfo = sequelize.define('UserInfo',{
-    FirstName: {
-       type: Sequelize.STRING,
-       allowNull: false,
-    },
-    LastName: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
-    CNIC: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true,
-        
-    },
-    Email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    PhoneNo: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },
-    DOB: {
-        type: Sequelize.DATE,
-        allowNull: true
-    }
-})
+// save user
 
 app.post('/userInfo', async (req, res) => {
     try {
