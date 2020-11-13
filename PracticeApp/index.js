@@ -8,20 +8,20 @@ const routes = require('./src/routes/Route')
 const app = express()
 const port = 3000
 app.use(express.json());
-const sequelize = new Sequelize('postgres://localhost:5432/mydatabasename')
+//const sequelize = new Sequelize('postgres://localhost:5432/mydatabasename')
 
 const dotenv = require('dotenv');
 dotenv.config();
 
 //db connection
-sequelize
-.authenticate()
-.then(() => {
-console.log('Connection has been established successfully.');
-})
-.catch(err => {
-console.error('Unable to connect to the database:', err);
-});
+// sequelize
+// .authenticate()
+// .then(() => {
+// console.log('Connection has been established successfully.');
+// })
+// .catch(err => {
+// console.error('Unable to connect to the database:', err);
+// });
 app.get('/', (req, res) => res.json({ message: 'Hello World' }))
 
 //app.use(authenticateToken)

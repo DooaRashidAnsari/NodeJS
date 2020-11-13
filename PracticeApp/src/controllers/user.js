@@ -1,16 +1,19 @@
-var User = require('../models/User').User;
+const db = require("../models/db");
+const User = db.users;
 const {generateToken} = require('../services/auth')
 
 module.exports.getUser = async (req, res) => {
-    const userId = req.params.userId
+    const cnic = req.params.cnic
      try {
       const user = await User.findAll({
         where: {
-        id: userId
-      }
-     }
-    )
-      res.json({ user , token: generateToken()})
+        CNIC: cnic
+        }
+       }
+      )
+      console.log('found user'+JSON.stringify(user));
+      var token = await generateToken(user[0].CNIC)
+      res.json({ user , token: token})
     } catch(error) {
       console.error(error)
     }   

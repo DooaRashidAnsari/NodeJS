@@ -14,6 +14,6 @@ module.exports.authenticateToken = async (req, res, next) => {
 }
 
 
-module.exports.generateToken = async (username) => {
-  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+module.exports.generateToken = async (cnic) => {
+  return jwt.sign(cnic, process.env.TOKEN_SECRET);
 }
