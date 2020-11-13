@@ -1,6 +1,7 @@
 var User = require('../models/User').User;
+const {generateToken} = require('../services/auth')
 
-module.exports.getUser = async (request, response) => {
+module.exports.getUser = async (req, res) => {
     const userId = req.params.userId
      try {
       const user = await User.findAll({
@@ -9,7 +10,7 @@ module.exports.getUser = async (request, response) => {
       }
      }
     )
-      res.json({ user })
+      res.json({ user , token: generateToken()})
     } catch(error) {
       console.error(error)
     }   
