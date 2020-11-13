@@ -19,8 +19,15 @@ module.exports.getUser = async (req, res) => {
     }   
 }
 
-module.exports.registerUser = async (request, response) => {
-    
+module.exports.registerUser = async (req, res) => {
+    try {
+      const newUser = new User(req.body)
+      await newUser.save();
+  
+      res.json({ user: newUser })
+    } catch(error) {
+      console.error(error)
+    }
 }
 
   
