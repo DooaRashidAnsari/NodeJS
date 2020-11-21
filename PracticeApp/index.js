@@ -2,12 +2,15 @@ const express = require('express')
 const Sequelize = require('sequelize')
 const jwt = require("jsonwebtoken");
 const routes = require('./src/routes/Route')
+const cors = require('cors');
+
 //const {authenticateToken} = require('./src/services/auth')
 
 
 const app = express()
 const port = 3000
 app.use(express.json());
+app.use(cors());
 //const sequelize = new Sequelize('postgres://localhost:5432/mydatabasename')
 
 const dotenv = require('dotenv');
