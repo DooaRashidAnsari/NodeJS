@@ -8,7 +8,7 @@ export default class Main extends Component<any, State> {
 
     constructor(props: any) {
         super(props);
-        this.state = { cnic: ''};
+        this.state = { cnic: '', user: {}};
     }
 
     setCnic = (event: any) => {
@@ -22,6 +22,7 @@ export default class Main extends Component<any, State> {
             .then(res => {
               console.log(res);
               console.log(res.data);
+              history.push({pathname: '/Update', state: {token: res.data.token, user: res.data.user[0]}}) 
             }).catch(error => {
               console.log('error:'+error);
             })

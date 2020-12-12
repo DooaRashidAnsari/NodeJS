@@ -16,6 +16,7 @@ module.exports.getUser = async (req, res) => {
       res.json({ user , token: token})
     } catch(error) {
       console.error(error)
+      res.json({message: 'User not found'});
     }   
 }
 
@@ -27,7 +28,32 @@ module.exports.registerUser = async (req, res) => {
       res.json({ user: newUser })
     } catch(error) {
       console.error(error)
+      res.json({message: 'Unable to register user'});
     }
+}
+
+module.exports.updateUser = async (req, res) => {
+  try {
+    const user = req.body;
+    User.update({
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      updatedAt: '2020-11-22'
+    }, {where: {CNIC: user.CNIC}}).then(async function([rowsUpdate]) {
+      const foundUser = await User.findAll({
+        where: {
+        CNIC: user.CNIC
+        }
+       }
+      )
+      res.json({rowsUpdate:rowsUpdate,  foundUser})
+    }).catch(error => {
+      console.log(error);
+      res.json('Unable to update record')})
+  } catch(error) {
+    console.error(error)
+    res.json({message: 'Unable to update user'});
+  }
 }
 
   
