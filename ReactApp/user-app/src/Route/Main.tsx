@@ -46,6 +46,7 @@ export default class Main extends Component<any, State> {
             </form>
            
                <Button variant="btn btn-success" onClick={() => history.push('/Register')}>Register</Button>
+               <Button variant="btn btn-success" onClick={() => history.push('/Chat')}>Chat</Button>
             </div>
         
 

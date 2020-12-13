@@ -16,7 +16,9 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.4.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "socket.io": "^3.0.4",
+    "socket.io-client": "^3.0.4"
   },
   "start": "node index.js"
 }
